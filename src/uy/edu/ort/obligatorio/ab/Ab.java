@@ -1,6 +1,6 @@
-package ab;
+package uy.edu.ort.obligatorio.ab;
 
-import ab.Ab;
+import uy.edu.ort.obligatorio.ab.Ab;
 
 public class Ab {
 	

@@ -1,4 +1,4 @@
-package Cola;
+package uy.edu.ort.obligatorio.cola;
 
 public class Cola<T> {
 	private NodoCola<T> inicio;

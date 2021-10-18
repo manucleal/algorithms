@@ -1,10 +1,11 @@
-package ab;
+package uy.edu.ort.obligatorio.ab;
 
 public class NodoAb {
 
 	private int dato;
 
 	private NodoAb izquierda;
+	
 	private NodoAb derecha;
 
 
