@@ -1,4 +1,4 @@
-package lista;
+package uy.edu.ort.obligatorio.lista;
 
 public class ListaOrd<T extends Comparable<T>> extends Lista<T>{
     

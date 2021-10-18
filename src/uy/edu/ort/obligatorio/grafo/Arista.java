@@ -1,4 +1,4 @@
-package grafo;
+package uy.edu.ort.obligatorio.grafo;
 
 public class Arista {
 

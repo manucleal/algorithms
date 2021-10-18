@@ -1,4 +1,4 @@
-package lista;
+package uy.edu.ort.obligatorio.lista;
 
 import java.util.Iterator;
 

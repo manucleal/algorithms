@@ -1,8 +1,7 @@
-package grafo;
+package uy.edu.ort.obligatorio.grafo;
 
-import Cola.Cola;
-import lista.ILista;
-import lista.Lista;
+import uy.edu.ort.obligatorio.cola.*;
+import uy.edu.ort.obligatorio.lista.*;
 
 public class Grafo {
 	private int tope;
