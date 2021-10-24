@@ -24,8 +24,6 @@ public class Application {
 		System.out.println(p6.resultado);
 		
 		System.out.println();
-		System.out.println("######### FIN PRUEBA REGISTRO #########");
-		System.out.println();
 		System.out.println("######### INICIO PRUEBA BUSCAR OBRERO #########");
 		System.out.println();
 		
@@ -33,11 +31,7 @@ public class Application {
 		
 		System.out.println(pruebaBuscarObrero.resultado);
 		System.out.println(pruebaBuscarObrero.valorEntero);
-		System.out.println(pruebaBuscarObrero.valorString);
-		
-		System.out.println();
-		System.out.println("######### FIN PRUEBA BUSCAR OBRERO #########");
-		System.out.println();
+		System.out.println(pruebaBuscarObrero.valorString);	
 		
 		System.out.println();
 		System.out.println("######### INICIO PRUEBA LISTAR OBREROS CRECIENTE #########");
@@ -47,12 +41,27 @@ public class Application {
 		System.out.println(pruebaListarObrerosCreciente.valorString);
 		
 		System.out.println();
-		System.out.println("######### FIN PRUEBA LISTAR OBREROS CRECIENTE #########");
+		System.out.println("######### INICIO PRUEBA REGISTRAR POSTES #########");
 		System.out.println();
 		
-			
-//		Grafo g = new Grafo(8, false);
-//		
+		Sistema pruebaMapa = new Sistema();
+		pruebaMapa.inicializarSistema(4);
+		
+		Retorno prubaMapa1 = pruebaMapa.registrarPoste(333, 222, "A");
+		Retorno prubaMapa7 = pruebaMapa.registrarPoste(333, 222, "A");
+		Retorno prubaMapa2 = pruebaMapa.registrarPoste(444, 555, "B");
+		Retorno prubaMapa3 = pruebaMapa.registrarPoste(111, 989, "C");
+		Retorno prubaMapa4 = pruebaMapa.registrarPoste(544, 888, "D");
+		Retorno prubaMapa5 = pruebaMapa.registrarPoste(544, 888, "H");
+		
+		System.out.println(prubaMapa1.resultado);
+		System.out.println(prubaMapa7.resultado);
+		System.out.println(prubaMapa2.resultado);
+		System.out.println(prubaMapa3.resultado);
+		System.out.println(prubaMapa4.resultado);
+		System.out.println(prubaMapa5.resultado);
+		
+//		Grafo g = new Grafo(8, false);		
 //		g.agregarVertice("A");
 //		g.agregarVertice("B");
 //		g.agregarVertice("C");
