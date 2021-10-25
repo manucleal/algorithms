@@ -1,21 +1,21 @@
 package uy.edu.ort.obligatorio;
 
 import uy.edu.ort.obligatorio.Retorno.Resultado;
-import uy.edu.ort.obligatorio.ab.AbbObrero;
-import uy.edu.ort.obligatorio.grafo.Grafo;
 import uy.edu.ort.obligatorio.obrero.Obrero;
+import uy.edu.ort.obligatorio.ab.AbbObrero;
+import uy.edu.ort.obligatorio.mapa.Mapa;
 
 public class Sistema implements ISistema {
 	
-	private Grafo mapa;
+	private Mapa mapa;
 	
 	private AbbObrero obreros;
 	
-	public Grafo getMapa() {
+	public Mapa getMapa() {
 		return mapa;
 	}
 
-	public void setMapa(Grafo mapa) {
+	public void setMapa(Mapa mapa) {
 		this.mapa = mapa;
 	}
 	
@@ -28,7 +28,7 @@ public class Sistema implements ISistema {
 		if(maxPuntos <= 0) {
 			return new Retorno(Resultado.ERROR_1); 
 		}
-		this.setMapa(new Grafo(maxPuntos));
+		this.setMapa(new Mapa(maxPuntos));
 		this.setObreros(new AbbObrero(null));
 		return new Retorno(Resultado.OK);
 	}
@@ -71,7 +71,14 @@ public class Sistema implements ISistema {
 
 	@Override
 	public Retorno registrarPoste(double coordX, double coordY, String nombre) {
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		if(this.mapa.esLleno()) {
+			return new Retorno(Resultado.ERROR_1);
+		}
+		if(this.mapa.existePoste(coordX, coordY, nombre)) {
+			return new Retorno(Resultado.ERROR_2);
+		}
+		this.mapa.agregarPoste(coordX, coordY, nombre);
+		return new Retorno(Resultado.OK);
 	}
 
 	@Override
@@ -94,7 +101,5 @@ public class Sistema implements ISistema {
 	public Retorno caminoMinimoEnBuenEstado(double coordXi, double coordYi, double coordXf, double coordYf) {
 		return new Retorno(Resultado.NO_IMPLEMENTADA);
 	}
-
-
 
 }
