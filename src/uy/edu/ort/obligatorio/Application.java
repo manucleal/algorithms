@@ -3,6 +3,10 @@ package uy.edu.ort.obligatorio;
 public class Application {
 
 	public static void main(String[] args) {
+		manualTest();
+	}
+	
+	private static void manualTest() {
 		Sistema pruebaObrero = new Sistema();
 		pruebaObrero.inicializarSistema(1);
 		
@@ -61,30 +65,22 @@ public class Application {
 		System.out.println(prubaMapa4.resultado);
 		System.out.println(prubaMapa5.resultado);
 		
-//		Grafo g = new Grafo(8, false);		
-//		g.agregarVertice("A");
-//		g.agregarVertice("B");
-//		g.agregarVertice("C");
-//		g.agregarVertice("D");
-//		g.agregarVertice("E");
-//		g.agregarVertice("F");
-//		g.agregarVertice("G");
-//		g.agregarVertice("H");
-//	
-//		g.agregarArista("A", "C", 2);
-//		g.agregarArista("C", "F", 4);
-//		g.agregarArista("A", "D", 2);
-//		g.agregarArista("D", "F", 9);
-//		g.agregarArista("F", "G", 3);
-//		g.agregarArista("D", "H", 8);
-//		g.agregarArista("H", "B", 1);		
-//		g.agregarArista("G", "H", 7);
-//		g.agregarArista("G", "E", 2);
-//		g.agregarArista("E", "B", 4);
-//		
+		System.out.println("######### INICIO PRUEBA REGISTRAR TRAMOS #########");
+		
+		prubaMapa1 = pruebaMapa.registrarTramo(333, 222, 444, 555, 100); // De A a B
+		prubaMapa7 = pruebaMapa.registrarTramo(544, 888, 333, 222, 150); // De D a A
+		prubaMapa2 = pruebaMapa.registrarTramo(444, 555, 111, 989, 130); // De B a C
+		prubaMapa3 = pruebaMapa.registrarTramo(111, 989, 544, 888, 50); // De C a D
+		prubaMapa4 = pruebaMapa.registrarTramo(544, 888, 333, 222, 200); // De D a A
+		
+		System.out.println(prubaMapa1.resultado);
+		System.out.println(prubaMapa7.resultado);
+		System.out.println(prubaMapa2.resultado);
+		System.out.println(prubaMapa3.resultado);
+		System.out.println(prubaMapa4.resultado);
+		System.out.println(prubaMapa5.resultado);
+		
 //		int pruebaDijkstra = g.dijkstra("D", "C");
 //		System.out.println(pruebaDijkstra);
-		
 	}
-
 }

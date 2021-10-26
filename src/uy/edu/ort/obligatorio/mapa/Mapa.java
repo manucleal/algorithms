@@ -1,5 +1,7 @@
 package uy.edu.ort.obligatorio.mapa;
 
+import uy.edu.ort.obligatorio.grafo.Arista;
+
 public class Mapa {
 	
 	private int tope;
@@ -55,12 +57,12 @@ public class Mapa {
 		this.postes = postes;
 	}
 	
-	public boolean existePoste(double coordX, double coordY, String nombre) {
-		return this.obtenerPosPoste(coordX, coordY, nombre) != -1;
+	public boolean existePoste(double coordX, double coordY) {
+		return this.obtenerPosPoste(coordX, coordY) != -1;
 	}
 	
-	public int obtenerPosPoste(double coordX, double coordY, String nombre) {
-		Poste auxPoste = new Poste(coordX, coordY, nombre);
+	public int obtenerPosPoste(double coordX, double coordY) {
+		Poste auxPoste = new Poste(coordX, coordY);
 		for (int i = 0; i < this.postes.length; i++) {
 			if (postes[i].equals(auxPoste)) {
 				return i;
@@ -85,21 +87,22 @@ public class Mapa {
 	}
 	
 	//PRE: existeVertice(Origen) && existeVertice(destino)
-	//public boolean existeTramo(double coordXorigen, double coordYorigen, double coordXdestino, double coordYdestino) {
-		//int posOrigen = obtenerPosPoste(coordXorigen, coordYorigen);
-		//int posDestino = obtenerPosPoste(coordXdestino, coordYdestino);
-		//return this.tramos[posOrigen][posDestino].isExiste();
-	//}
+	public boolean existeTramo(double coordXorigen, double coordYorigen, double coordXdestino, double coordYdestino) {
+		int posOrigen = obtenerPosPoste(coordXorigen, coordYorigen);
+		int posDestino = obtenerPosPoste(coordXdestino, coordYdestino);
+		return this.tramos[posOrigen][posDestino].isExiste();
+	}
 	
 	//PRE: existeVertice(Origen) && existeVertice(destino) && !existeArista
-//	public void agregarTramo(String origen, String destino, double metros) {
-//		int posOrigen = obtenerPosPoste(origen);
-//		int posDestino = obtenerPosPoste(destino);
-//		
-//		Tramo t = this.tramos[posOrigen][posDestino];
-//		t.setExiste(true);
-//		t.setMetros(metros);
-//	}
+	public void agregarTramo(double coordXi, double coordYi, double coordXf, double coordYf, double metros) {
+		
+		int posOrigen = obtenerPosPoste(coordXi, coordYi);
+		int posDestino = obtenerPosPoste(coordXf, coordYf);
+		
+		Tramo t = this.tramos[posOrigen][posDestino];
+		t.setExiste(true);
+		t.setMetros(metros);
+	}
 	
 	public boolean esLleno() {
 		return this.cantidad == this.tope;

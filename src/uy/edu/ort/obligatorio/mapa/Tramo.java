@@ -1,5 +1,7 @@
 package uy.edu.ort.obligatorio.mapa;
 
+import uy.edu.ort.obligatorio.ISistema.Estado;
+
 public class Tramo {
 	
 	private boolean existe;
