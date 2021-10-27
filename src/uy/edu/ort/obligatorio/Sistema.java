@@ -86,7 +86,7 @@ public class Sistema implements ISistema {
 		if (metros <= 0) {
 			return new Retorno(Resultado.ERROR_1);
 		}
-		if (!this.mapa.existePoste(coordXi, coordYi) && !this.mapa.existePoste(coordXf, coordYf)) {
+		if (!this.mapa.existePoste(coordXi, coordYi) || !this.mapa.existePoste(coordXf, coordYf)) {
 			return new Retorno(Resultado.ERROR_2);
 		}
 		if (this.mapa.existeTramo(coordXi, coordYi, coordXf, coordYf)) {
@@ -99,7 +99,17 @@ public class Sistema implements ISistema {
 	@Override
 	public Retorno actualizarTramo(double coordXi, double coordYi, double coordXf, double coordYf, double metros,
 			Estado estado) {
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		if (metros <= 0 || estado == null) {
+			return new Retorno(Resultado.ERROR_1);
+		}
+		if (!this.mapa.existePoste(coordXi, coordYi) || !this.mapa.existePoste(coordXf, coordYf)) {
+			return new Retorno(Resultado.ERROR_2);
+		}
+		if (!this.mapa.existeTramo(coordXi, coordYi, coordXf, coordYf)) {
+			return new Retorno(Resultado.ERROR_3);
+		}
+		this.mapa.actualizarTramo(coordXi, coordYi, coordXf, coordYf, metros, estado);
+		return new Retorno(Resultado.OK);
 	}
 
 	@Override

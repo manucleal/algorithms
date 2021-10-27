@@ -1,5 +1,6 @@
 package uy.edu.ort.obligatorio.mapa;
 
+import uy.edu.ort.obligatorio.ISistema.Estado;
 import uy.edu.ort.obligatorio.grafo.Arista;
 
 public class Mapa {
@@ -14,7 +15,7 @@ public class Mapa {
 	
 	public Mapa() {}
 	
-	
+	// PRE: !esDirigido
 	public Mapa(int unTope) {
 		this.tope = unTope;
 		this.inicializarPostes();
@@ -22,6 +23,7 @@ public class Mapa {
 		for (int i = 0; i < this.tope; i++) {
 			for (int j = 0; j < this.tope; j++) {
 				this.tramos[i][j] = new Tramo();
+				this.tramos[j][i] = this.tramos[i][j];
 			}
 		}
 	}
@@ -30,26 +32,6 @@ public class Mapa {
 		this.setPostes(new Poste[this.tope]);
 		for(int i = 0; i < this.tope; i++) {
 			this.postes[i] = new Poste();
-		}
-	}
-	
-	public Mapa(int unTope, boolean esDirigido) {
-		this.tope = unTope;
-		this.setPostes(new Poste[tope]);
-		this.tramos = new Tramo[tope][tope];
-		if (esDirigido) {
-			for (int i = 0; i < tope; i++) {
-				for (int j = 0; j < tope; j++) {
-					this.tramos[i][j] = new Tramo();
-				}
-			}
-		} else {
-			for (int i = 0; i < tope; i++) {
-				for (int j = i; j < tope; j++) {
-					this.tramos[i][j] = new Tramo();
-					this.tramos[j][i] = this.tramos[i][j];
-				}
-			}
 		}
 	}
 
@@ -102,6 +84,9 @@ public class Mapa {
 		Tramo t = this.tramos[posOrigen][posDestino];
 		t.setExiste(true);
 		t.setMetros(metros);
+		t = this.tramos[posDestino][posOrigen];
+		t.setExiste(true);
+		t.setMetros(metros);
 	}
 	
 	public boolean esLleno() {
@@ -110,6 +95,19 @@ public class Mapa {
 	
 	public boolean esVacio() {
 		return this.cantidad == 0;
+	}
+
+	public void actualizarTramo(double coordXi, double coordYi, double coordXf, double coordYf, double metros, Estado estado) {
+		int posOrigen = obtenerPosPoste(coordXi, coordYi);
+		int posDestino = obtenerPosPoste(coordXf, coordYf);
+		
+		Tramo t = this.tramos[posOrigen][posDestino];
+		t.setMetros(metros);
+		t.setEstados(estado);
+
+		t = this.tramos[posDestino][posOrigen];
+		t.setMetros(metros);
+		t.setEstados(estado);
 	}
 
 }
