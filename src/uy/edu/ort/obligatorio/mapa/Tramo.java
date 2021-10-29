@@ -8,9 +8,11 @@ public class Tramo {
 	
 	private double metros;
 	
-	private Estado estados;
+	private Estado estado;
 	
-	public Tramo () {}
+	public Tramo () {
+		this.estado = Estado.BUENO;
+	}
 
 	public boolean isExiste() {
 		return existe;
@@ -29,11 +31,11 @@ public class Tramo {
 	}
 
 	public Estado getEstados() {
-		return estados;
+		return estado;
 	}
 
 	public void setEstados(Estado estados) {
-		this.estados = estados;
+		this.estado = estados;
 	}
 
 }
