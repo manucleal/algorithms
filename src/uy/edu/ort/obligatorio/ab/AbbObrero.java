@@ -28,7 +28,7 @@ public class AbbObrero {
 
 	// pre nodo != null
 	private void insertarRec(NodoObrero nodo, Obrero dato) {
-		if (dato.getCedula().compareTo(nodo.getDato().getCedula()) > 0)  {
+		if (sanitizeDocument(dato.getCedula()) > sanitizeDocument(nodo.getDato().getCedula())) {
 			if (nodo.getDerecha() == null) {
 				nodo.setDerecha(new NodoObrero(dato));
 			} else {
@@ -43,6 +43,10 @@ public class AbbObrero {
 		}
 	}
 	
+	private static int sanitizeDocument(String document) {
+		return Integer.parseInt(document.replace(".", "").replace("-", ""));
+	}
+	
 	public Retorno pertenece(String dato) {
 		return perteneceRec(this.raiz, dato);
 	}
@@ -54,7 +58,7 @@ public class AbbObrero {
 			String cedulaNombre = nodo.getDato().getCedula() + ";" + nodo.getDato().getNombre();
 			return new Retorno(Resultado.OK, 1, cedulaNombre);
 		} else {
-			if (dato.compareTo(nodo.getDato().getCedula()) > 0) {
+			if (sanitizeDocument(dato) > sanitizeDocument(nodo.getDato().getCedula())) {
 				Retorno retorno = perteneceRec(nodo.getDerecha(), dato);
 				retorno.valorEntero++;
 				return retorno;
@@ -67,7 +71,8 @@ public class AbbObrero {
 	}
 	
 	public String listarAsc() {
-		return listarAscRec(this.raiz);
+		String listadoObreros = listarAscRec(this.raiz);
+		return listadoObreros.substring(0, listadoObreros.length() - 1);
 	}
 
 	private String listarAscRec(NodoObrero nodo) {

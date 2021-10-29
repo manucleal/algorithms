@@ -10,6 +10,8 @@ public class Poste {
 	
 	private boolean existe;
 	
+	public Poste() {}
+	
 	public Poste(double coordX, double coordY, String nombre) {
 		this.coordX = coordX;
 		this.coordY = coordY;
@@ -17,13 +19,20 @@ public class Poste {
 		this.existe = true;
 	}
 	
+	// Crea un Poste auxiliar, para comparar las coordenadas.
+	public Poste(double coordX2, double coordY2) {
+		this.coordX = coordX2;
+		this.coordY = coordY2;
+		this.existe = true;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof Poste) {
 			Poste tmpPoste = (Poste) obj;
 			if(Double.compare(tmpPoste.coordX, this.coordX) == 0 && 
 					Double.compare(tmpPoste.coordY, this.coordY) == 0 && 
-					tmpPoste.existe == this.existe && tmpPoste.nombre.equals(tmpPoste.nombre)) {
+					this.existe) {
 				return true;
 			}
 			return false;
