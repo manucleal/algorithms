@@ -55,7 +55,7 @@ public class AbbObrero {
 		if (nodo == null) {
 			return new Retorno(Resultado.ERROR_2);
 		} else if (nodo.getDato().getCedula().equals(dato)) {
-			String cedulaNombre = nodo.getDato().getCedula() + ";" + nodo.getDato().getNombre();
+			String cedulaNombre = nodo.toString();
 			return new Retorno(Resultado.OK, 1, cedulaNombre);
 		} else {
 			if (sanitizeDocument(dato) > sanitizeDocument(nodo.getDato().getCedula())) {
