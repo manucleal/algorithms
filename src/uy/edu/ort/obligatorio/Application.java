@@ -13,7 +13,7 @@ public class Application {
 		System.out.println("######### INICIO PRUEBA REGISTAR OBRERO #########");
 		System.out.println();
 		
-		Retorno p1 = pruebaObrero.registrarObrero("4.765.789-1", "Fausto Perillo");
+		Retorno p1 = pruebaObrero.registrarObrero("765.789-0", "Fausto Perillo");
 		Retorno p2 = pruebaObrero.registrarObrero("4.690.278-1", "Emanuel Coitiño");
 		Retorno p5 = pruebaObrero.registrarObrero("4.690.278-1", "Emanuel Coitiño");
 		Retorno p3 = pruebaObrero.registrarObrero("4.868.467-1", "Pablo Ingold");
@@ -35,7 +35,7 @@ public class Application {
 		
 		System.out.println(pruebaBuscarObrero.resultado);
 		System.out.println(pruebaBuscarObrero.valorEntero);
-		System.out.println(pruebaBuscarObrero.valorString);	
+		System.out.println(pruebaBuscarObrero.valorString);
 		
 		System.out.println();
 		System.out.println("######### INICIO PRUEBA LISTAR OBREROS CRECIENTE #########");
@@ -65,19 +65,29 @@ public class Application {
 		System.out.println(pruebaMapa4.resultado);
 		System.out.println(pruebaMapa5.resultado);
 		
+		System.out.println();
 		System.out.println("######### INICIO PRUEBA REGISTRAR TRAMOS #########");
-		
+		System.out.println();
+
 		pruebaMapa1 = pruebaMapa.registrarTramo(333, 222, 444, 555, 100); // De A a B
 		pruebaMapa7 = pruebaMapa.registrarTramo(544, 888, 333, 222, 150); // De D a A
 		pruebaMapa2 = pruebaMapa.registrarTramo(444, 555, 111, 989, 130); // De B a C
 		pruebaMapa3 = pruebaMapa.registrarTramo(111, 989, 544, 888, 50); // De C a D
-		pruebaMapa4 = pruebaMapa.registrarTramo(544, 888, 333, 222, 200); // De D a A
+		pruebaMapa4 = pruebaMapa.registrarTramo(544, 888, 333, 222, 200); // De D a A ERROR
 		
 		System.out.println(pruebaMapa1.resultado);
 		System.out.println(pruebaMapa7.resultado);
 		System.out.println(pruebaMapa2.resultado);
 		System.out.println(pruebaMapa3.resultado);
 		System.out.println(pruebaMapa4.resultado);
+		
+		System.out.println();
+		System.out.println("######### INICIO PRUEBA CUADRILLA DE AUDITORIA #########");
+		System.out.println();
+		
+		Retorno priebaCuadrilla = pruebaMapa.cuadrillaAuditoria(333, 222, 1);
+		System.out.println(priebaCuadrilla.valorString);
+		
 		
 //		int pruebaDijkstra = g.dijkstra("D", "C");
 //		System.out.println(pruebaDijkstra);

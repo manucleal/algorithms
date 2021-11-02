@@ -72,4 +72,9 @@ public class Poste {
 		this.existe = existe;
 	}
 	
+	@Override
+    public String toString() {
+        return this.getCoordX() + ";" + this.getCoordY() + ";" + this.getNombre() + "|";
+    }
+	
 }

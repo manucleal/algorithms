@@ -1,7 +1,7 @@
 package uy.edu.ort.obligatorio.mapa;
 
 import uy.edu.ort.obligatorio.ISistema.Estado;
-import uy.edu.ort.obligatorio.grafo.Arista;
+import uy.edu.ort.obligatorio.cola.Cola;
 
 public class Mapa {
 	
@@ -108,6 +108,91 @@ public class Mapa {
 		t = this.tramos[posDestino][posOrigen];
 		t.setMetros(metros);
 		t.setEstados(estado);
+	}
+	
+	public String bfs(double coordXorigen, double coordYorigen, int cantTramosMaximo) {
+		int pos = obtenerPosPoste(coordXorigen, coordYorigen);
+		boolean[] visitados = new boolean[tope];
+		int[] level = new int[tope];
+		Cola<Integer> cola = new Cola<>();
+		cola.encolar(pos);
+		visitados[pos] = true;
+		String mostrarRecorrido = "";
+		
+		while (!cola.esVacia()) {					
+			pos = cola.desencolar();
+			mostrarRecorrido += this.postes[pos].toString();
+			for (int j = 0; j < tope; j++) {
+				if (this.tramos[pos][j].isExiste() && !visitados[j]) {
+					level[j] = level[pos] + 1;
+					if (level[j] <= cantTramosMaximo) {
+						cola.encolar(j);
+						visitados[j] = true;						
+					}
+				}
+			}
+		}
+		return mostrarRecorrido.substring(0, mostrarRecorrido.length() - 1);
+	}
+	
+	/*
+	 * inicializar estructuras
+	 * Marcar el origen con distancia cero.
+	 * 	Loop:
+	 * 1) Obtener el vértice no visitado de menor costo (si hay varios cualquiera)
+	 * 2) Visitarlo
+	 * 3) Evaluar si tengo que actualizar el costo de los adyacentes NO VISITADOS. 
+	*/
+
+	public double dijkstra(double coordXorigen,double coordYorigen, double coordXdestino, double coordydestino) {
+		int posOrigen = obtenerPosPoste(coordXorigen, coordYorigen);
+		int posDestino = obtenerPosPoste(coordXdestino, coordydestino);
+		
+		boolean[] visitados = new boolean[tope];
+		double[] costos = this.iniciarVectorCostos();
+		Poste[] anteriores = new Poste[tope];
+		
+		costos[posOrigen] = 0;
+		
+		for (int i = 0; i < this.cantidad; i++) {
+			int pos = this.obtenerSiguienteVerticeNoVisitadoDeMenorCosto(costos, visitados);
+			if(pos != -1) {
+				visitados[pos] = true;
+				
+				for (int j = 0; j < this.tope; j++) {
+					if(this.tramos[pos][j].isExiste() && !visitados[j]) {
+						double distanciaNueva = costos[pos] + this.tramos[pos][j].getMetros();
+						if(distanciaNueva < costos[j]) {
+							costos[j] = distanciaNueva;
+							anteriores[j] = this.postes[pos];
+						}
+					}
+				}
+			}
+		}
+
+		return costos[posDestino];
+	}
+	
+	private int obtenerSiguienteVerticeNoVisitadoDeMenorCosto(double[] costos, boolean[] visitados) {
+		double menorCosto = Double.MAX_VALUE;
+		int posMin = -1;
+		for (int i = 0; i < tope; i++) {
+			if(!visitados[i] && costos[i] < menorCosto) {
+				menorCosto = costos[i];
+				posMin = i;
+			}				
+		}
+					
+		return posMin;
+	}
+	
+	private double[] iniciarVectorCostos() {
+		double[] costo = new double[tope];
+		for (int i = 0; i < tope; i++) {
+			costo[i] = Integer.MAX_VALUE;
+		}
+		return costo;
 	}
 
 }

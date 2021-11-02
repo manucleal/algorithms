@@ -1,5 +1,8 @@
 package uy.edu.ort.obligatorio;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import uy.edu.ort.obligatorio.Retorno.Resultado;
 import uy.edu.ort.obligatorio.obrero.Obrero;
 import uy.edu.ort.obligatorio.ab.AbbObrero;
@@ -52,8 +55,9 @@ public class Sistema implements ISistema {
 		return new Retorno(Resultado.OK);
 	}
 	
-	private boolean isValidCedula(String cedula) {
-		return true;
+	private boolean isValidCedula(String cedula) {		
+		Pattern pattern = Pattern.compile("^(\\d{1}\\.{1}\\d{3}\\.{1}\\d{3}\\-{1}\\d{1}|(\\d{3}\\.{1}\\d{3}\\-{1}\\d{1}))$");
+		return pattern.matcher(cedula.trim()).matches();
 	}
 
 	@Override
@@ -114,7 +118,10 @@ public class Sistema implements ISistema {
 
 	@Override
 	public Retorno cuadrillaAuditoria(double coordXi, double coordYi, int cantTramosMaximo) {
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		if (!this.mapa.existePoste(coordXi, coordYi)) {
+			return new Retorno(Resultado.ERROR_1);
+		}
+		return new Retorno(Resultado.OK,0,this.mapa.bfs(coordXi, coordYi, cantTramosMaximo));
 	}
 
 	@Override

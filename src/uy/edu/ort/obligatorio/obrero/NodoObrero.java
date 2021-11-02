@@ -41,4 +41,10 @@ public class NodoObrero {
 	public void setDerecha(NodoObrero derecha) {
 		this.derecha = derecha;
 	}
+
+	@Override
+	public String toString() {
+		return this.getDato().getCedula() + ";" + this.getDato().getNombre();
+	}
+	
 }
