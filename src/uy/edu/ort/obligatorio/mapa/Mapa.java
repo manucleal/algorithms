@@ -1,6 +1,8 @@
 package uy.edu.ort.obligatorio.mapa;
 
 import uy.edu.ort.obligatorio.ISistema.Estado;
+import uy.edu.ort.obligatorio.Retorno.Resultado;
+import uy.edu.ort.obligatorio.Retorno;
 import uy.edu.ort.obligatorio.cola.Cola;
 
 public class Mapa {
@@ -144,7 +146,7 @@ public class Mapa {
 	 * 3) Evaluar si tengo que actualizar el costo de los adyacentes NO VISITADOS. 
 	*/
 
-	public double dijkstra(double coordXorigen,double coordYorigen, double coordXdestino, double coordydestino) {
+	public Retorno dijkstra(double coordXorigen, double coordYorigen, double coordXdestino, double coordydestino) {
 		int posOrigen = obtenerPosPoste(coordXorigen, coordYorigen);
 		int posDestino = obtenerPosPoste(coordXdestino, coordydestino);
 		
@@ -156,12 +158,13 @@ public class Mapa {
 		
 		for (int i = 0; i < this.cantidad; i++) {
 			int pos = this.obtenerSiguienteVerticeNoVisitadoDeMenorCosto(costos, visitados);
-			if(pos != -1) {
+			if (pos != -1) {
 				visitados[pos] = true;
 				
 				for (int j = 0; j < this.tope; j++) {
-					if(this.tramos[pos][j].isExiste() && !visitados[j]) {
-						double distanciaNueva = costos[pos] + this.tramos[pos][j].getMetros();
+					Tramo tramo = this.tramos[pos][j];
+					if(tramo.isExiste() && tramo.getEstado() != Estado.MALO && !visitados[j]) {
+						double distanciaNueva = costos[pos] + tramo.getMetros();
 						if(distanciaNueva < costos[j]) {
 							costos[j] = distanciaNueva;
 							anteriores[j] = this.postes[pos];
@@ -170,8 +173,25 @@ public class Mapa {
 				}
 			}
 		}
-
-		return costos[posDestino];
+		String camino = obtenerCaminoMinimo(anteriores, posOrigen, posDestino); // Armar camino.
+		
+		Retorno result = new Retorno(Resultado.OK, 
+				(int) costos[posDestino], 
+				camino); 
+		
+		
+		return result;
+	}
+	
+	private String obtenerCaminoMinimo(Poste[] anteriores, int posOrigen, int posActual) {
+		if (posActual == posOrigen) {
+			return this.postes[posActual].toString();
+		}
+		int posAnterior = obtenerPosPoste(anteriores[posActual].getCoordX(), anteriores[posActual].getCoordY());
+		String camino = this.obtenerCaminoMinimo(anteriores, posOrigen, posAnterior)
+				+ this.postes[posActual].toString();
+		
+		return camino;
 	}
 	
 	private int obtenerSiguienteVerticeNoVisitadoDeMenorCosto(double[] costos, boolean[] visitados) {

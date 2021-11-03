@@ -1,5 +1,7 @@
 package uy.edu.ort.obligatorio;
 
+import uy.edu.ort.obligatorio.ISistema.Estado;
+
 public class Application {
 
 	public static void main(String[] args) {
@@ -88,8 +90,30 @@ public class Application {
 		Retorno priebaCuadrilla = pruebaMapa.cuadrillaAuditoria(333, 222, 1);
 		System.out.println(priebaCuadrilla.valorString);
 		
+
+		System.out.println();
+		System.out.println("######### INICIO PRUEBA CUADRILLA DE AUDITORIA #########");
+		System.out.println();
 		
-//		int pruebaDijkstra = g.dijkstra("D", "C");
-//		System.out.println(pruebaDijkstra);
+		
+		Retorno pruebaDijkstra = pruebaMapa.caminoMinimoEnBuenEstado(333, 222, 111, 989);
+		System.out.println(pruebaDijkstra.resultado);
+		System.out.println(pruebaDijkstra.valorEntero);
+		System.out.println(pruebaDijkstra.valorString);
+		
+		System.out.println("Camino entre A y D");
+		pruebaDijkstra = pruebaMapa.caminoMinimoEnBuenEstado(333, 222, 544, 888);
+		System.out.println(pruebaDijkstra.resultado);
+		System.out.println(pruebaDijkstra.valorEntero);
+		System.out.println(pruebaDijkstra.valorString);
+		
+		Retorno pruebaMalEstado = pruebaMapa.actualizarTramo(333, 222, 544, 888, 150, Estado.MALO);
+		System.out.println(pruebaMalEstado.resultado);
+		
+		System.out.println("Repito camino entre A y D");
+		pruebaDijkstra = pruebaMapa.caminoMinimoEnBuenEstado(333, 222, 544, 888);
+		System.out.println(pruebaDijkstra.resultado);
+		System.out.println(pruebaDijkstra.valorEntero);
+		System.out.println(pruebaDijkstra.valorString);
 	}
 }

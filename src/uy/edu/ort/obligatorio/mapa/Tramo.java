@@ -30,7 +30,7 @@ public class Tramo {
 		this.metros = metros;
 	}
 
-	public Estado getEstados() {
+	public Estado getEstado() {
 		return estado;
 	}
 
