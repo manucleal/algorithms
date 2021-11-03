@@ -1,6 +1,5 @@
 package uy.edu.ort.obligatorio;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import uy.edu.ort.obligatorio.Retorno.Resultado;
@@ -55,7 +54,7 @@ public class Sistema implements ISistema {
 		return new Retorno(Resultado.OK);
 	}
 	
-	private boolean isValidCedula(String cedula) {		
+	private boolean isValidCedula(String cedula) {
 		Pattern pattern = Pattern.compile("^(\\d{1}\\.{1}\\d{3}\\.{1}\\d{3}\\-{1}\\d{1}|(\\d{3}\\.{1}\\d{3}\\-{1}\\d{1}))$");
 		return pattern.matcher(cedula.trim()).matches();
 	}
@@ -126,7 +125,15 @@ public class Sistema implements ISistema {
 
 	@Override
 	public Retorno caminoMinimoEnBuenEstado(double coordXi, double coordYi, double coordXf, double coordYf) {
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		if (!this.mapa.existePoste(coordXi, coordYi) || !this.mapa.existePoste(coordXf, coordYf)) {
+			return new Retorno(Resultado.ERROR_1);
+		}
+		// Si no hay camino entre (coordXi, coordYi) y (coordXf,
+		// coordYf) utilizando únicamente tramos en estado “Bueno” o
+		// “Regular”.
+		
+		
+		return this.mapa.dijkstra(coordXi, coordYi, coordXf, coordYf);
 	}
 
 }
