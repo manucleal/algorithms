@@ -1,9 +1,7 @@
-package uy.edu.ort.obligatorio.ab;
+package uy.edu.ort.obligatorio.obrero;
 
 import uy.edu.ort.obligatorio.Retorno;
 import uy.edu.ort.obligatorio.Retorno.Resultado;
-import uy.edu.ort.obligatorio.obrero.NodoObrero;
-import uy.edu.ort.obligatorio.obrero.Obrero;
 
 public class AbbObrero {
 	
