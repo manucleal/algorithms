@@ -5,10 +5,11 @@ import uy.edu.ort.obligatorio.ISistema.Estado;
 public class Application {
 
 	public static void main(String[] args) {
+		// manualTestConDebug();
 		manualTest();
 	}
 	
-	private static void manualTest() {
+	private static void manualTestConDebug() {
 		Sistema pruebaObrero = new Sistema();
 		pruebaObrero.inicializarSistema(1);
 		
@@ -115,5 +116,46 @@ public class Application {
 		System.out.println(pruebaDijkstra.resultado);
 		System.out.println(pruebaDijkstra.valorEntero);
 		System.out.println(pruebaDijkstra.valorString);
+	}
+	
+	private static void manualTest() {
+		Sistema pruebaObrero = new Sistema();
+		pruebaObrero.inicializarSistema(1);
+		
+		pruebaObrero.registrarObrero("765.789-0", "Fausto Perillo");
+		pruebaObrero.registrarObrero("4.690.278-1", "Emanuel Coitiño");
+		pruebaObrero.registrarObrero("4.690.278-1", "Emanuel Coitiño");
+		pruebaObrero.registrarObrero("4.868.467-1", "Pablo Ingold");
+		pruebaObrero.registrarObrero("4.765.789-1", "Pablo Ingold");
+		pruebaObrero.registrarObrero("4.765.333-1", "Fernanda Serna");
+		
+		pruebaObrero.buscarObrero("4.765.333-1");
+		
+		pruebaObrero.listarObreros();
+		
+		Sistema pruebaMapa = new Sistema();
+		pruebaMapa.inicializarSistema(4);
+		
+		pruebaMapa.registrarPoste(333, 222, "A");
+		pruebaMapa.registrarPoste(333, 222, "A");
+		pruebaMapa.registrarPoste(444, 555, "B");
+		pruebaMapa.registrarPoste(111, 989, "C");
+		pruebaMapa.registrarPoste(544, 888, "D");
+		pruebaMapa.registrarPoste(544, 888, "H");
+
+		pruebaMapa.registrarTramo(333, 222, 444, 555, 100); // De A a B
+		pruebaMapa.registrarTramo(544, 888, 333, 222, 150); // De D a A
+		pruebaMapa.registrarTramo(444, 555, 111, 989, 130); // De B a C
+		pruebaMapa.registrarTramo(111, 989, 544, 888, 50); // De C a D
+		pruebaMapa.registrarTramo(544, 888, 333, 222, 200); // De D a A ERROR
+		
+		pruebaMapa.cuadrillaAuditoria(333, 222, 1);
+		
+		
+		pruebaMapa.caminoMinimoEnBuenEstado(333, 222, 111, 989);
+		pruebaMapa.caminoMinimoEnBuenEstado(333, 222, 544, 888);
+		
+		pruebaMapa.actualizarTramo(333, 222, 544, 888, 150, Estado.MALO);
+		pruebaMapa.caminoMinimoEnBuenEstado(333, 222, 544, 888);
 	}
 }

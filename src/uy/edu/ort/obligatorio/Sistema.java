@@ -3,8 +3,8 @@ package uy.edu.ort.obligatorio;
 import java.util.regex.Pattern;
 
 import uy.edu.ort.obligatorio.Retorno.Resultado;
+import uy.edu.ort.obligatorio.obrero.AbbObrero;
 import uy.edu.ort.obligatorio.obrero.Obrero;
-import uy.edu.ort.obligatorio.ab.AbbObrero;
 import uy.edu.ort.obligatorio.mapa.Mapa;
 
 public class Sistema implements ISistema {
